@@ -34,15 +34,22 @@ class Huffman:
             dic['count'] = count
             self.dataNumber.append(dic)
 
-        sort = sorted(self.dataNumber,key= lambda x:x['count'],reverse=True)
+        sort = sorted(self.dataNumber,key= lambda x:x['count']\
+            ,reverse=True)
+        self.dataNumber = sort
 
         print(np.array(sort))
 
 
+    def getBinary(self):
+        
+        word = {}
+        for data in self.dataNumber:
+            word = data
+            word['binary'] = bin(word['count'])
+            print(word)
 
-    def orderLetters(self):
-        """ This order the letters from data """
-        pass
+        print(self.dataNumber)
 
     def getData(self):
         for letter in self.data:
@@ -54,3 +61,4 @@ class Huffman:
 data = Huffman()
 data.readFile('data/input_1.txt')
 data.getNumberLetters()
+data.getBinary()
