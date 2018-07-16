@@ -1,3 +1,6 @@
+from heapq import heappush, heappop
+import numpy as np
+
 class Huffman:
     """ Huffman encoding data """
    
@@ -20,21 +23,21 @@ class Huffman:
 
     def getNumberLetters(self):
         """ This get the number letters from file """
+
         letters = [ letter for letter in self.data] 
         letters = set(letters)
-        
-        count =0
-        temp = {}
-        for letter in letters:
-            for text in self.data:
-                if letter is text:
-                    count = count +1
 
-            temp[letter] = count            
-            self.dataNumber.append(temp)
-            count= 0
-        
-        print(self.dataNumber)
+        for letter in letters:
+            dic = {}
+            count = self.data.count(letter)
+            dic['letter'] = letter
+            dic['count'] = count
+            self.dataNumber.append(dic)
+
+        sort = sorted(self.dataNumber,key= lambda x:x['count'],reverse=True)
+
+        print(np.array(sort))
+
 
 
     def orderLetters(self):
