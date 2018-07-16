@@ -47,7 +47,7 @@ class Huffman:
         for data in self.dataNumber:
             word = data
             word['binary'] = bin(word['count'])
-            print(word)
+            
 
         print(self.dataNumber)
 
