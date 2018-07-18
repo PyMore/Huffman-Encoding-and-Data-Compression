@@ -1,64 +1,56 @@
+from collections import Counter
 from heapq import heappush, heappop
-import numpy as np
 
 class Huffman:
     """ Huffman encoding data """
    
     def __init__(self):
         self.data = ""
-        self.dataNumber = []
+        
+
+    def frequency(self,texto):
+        """ This get the number letters from file """        
+        return Counter(texto)
+
+    def joined_nodes(self,nodeA,nodeB):
+        print(nodeA[0])
+        print(nodeB[0])
+        frequency = nodeA[0] + nodeB[0]
+        print(frequency)
+        join = (frequency, None, nodeA, nodeB)
+        return join
 
 
-    def showData(self,data):
-        print(data)
+    def prefixos(self,dataFrequency):
+        print(dataFrequency)
+        dataNodes = []
+        for char, freq in dataFrequency.items():
+            heappush(dataNodes, (freq, char))
+
+        while len(dataNodes) > 1:
+            nodeA = heappop(dataNodes);
+            nodeB = heappop(dataNodes);
+            join = self.joined_nodes(nodeA,nodeB)
+            print(dataNodes)
+            print(join)
+            heappush(arvore, join)
+#            heappush(arvore,join)
+
+    def doTree(self,dict):
+        pass
 
 
     def readFile(self,path):
         """ Read the file from data """
+
         with open(path) as f:
             read_data = f.read()
             self.data = read_data;
             f.closed
-
-
-    def getNumberLetters(self):
-        """ This get the number letters from file """
-
-        letters = [ letter for letter in self.data] 
-        letters = set(letters)
-
-        for letter in letters:
-            dic = {}
-            count = self.data.count(letter)
-            dic['letter'] = letter
-            dic['count'] = count
-            self.dataNumber.append(dic)
-
-        sort = sorted(self.dataNumber,key= lambda x:x['count']\
-            ,reverse=True)
-        self.dataNumber = sort
-
-        print(np.array(sort))
-
-
-    def getBinary(self):
         
-        word = {}
-        for data in self.dataNumber:
-            word = data
-            word['binary'] = bin(word['count'])
-            
-
-        print(self.dataNumber)
-
-    def getData(self):
-        for letter in self.data:
-            print(letter)
-
-        return self.data.islower
+        data  = self.frequency(self.data)
+        self.prefixos(data)
 
 
 data = Huffman()
 data.readFile('data/input_1.txt')
-data.getNumberLetters()
-data.getBinary()
