@@ -1,5 +1,5 @@
 from collections import Counter
-from heapq import heappush, heappop
+from heapq import heappush, heappop,heapify
 
 class Huffman:
     """ Huffman encoding data """
@@ -13,31 +13,25 @@ class Huffman:
         return Counter(texto)
 
     def joined_nodes(self,nodeA,nodeB):
-        print(nodeA[0])
-        print(nodeB[0])
-        frequency = nodeA[0] + nodeB[0]
-        print(frequency)
-        join = (frequency, None, nodeA, nodeB)
+        frequency = nodeA[1] + nodeB[1]
+        join = (frequency, nodeA, nodeB)
         return join
 
 
     def prefixos(self,dataFrequency):
-        print(dataFrequency)
-        dataNodes = []
-        for char, freq in dataFrequency.items():
-            heappush(dataNodes, (freq, char))
 
-        while len(dataNodes) > 1:
-            nodeA = heappop(dataNodes);
-            nodeB = heappop(dataNodes);
-            join = self.joined_nodes(nodeA,nodeB)
-            print(dataNodes)
-            print(join)
-            heappush(arvore, join)
-#            heappush(arvore,join)
+        frequArray= list(Counter(dataFrequency).items())
+        heapify(frequArray)
+        data = []
 
-    def doTree(self,dict):
-        pass
+        while len(frequArray) > 1:
+            nodeA = heappop(frequArray);
+            nodeB = heappop(frequArray);
+            join = self.joined_nodes(nodeA,nodeB)   
+            heappush(data, join)
+        print(data)
+
+
 
 
     def readFile(self,path):
